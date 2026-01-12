@@ -17,13 +17,7 @@ return new class extends Migration
             $table->decimal('precio_venta', 10, 2);
             $table->integer('stock');
             $table->timestamps();
-
-            $table->foreignId('id_movimiento')
-                ->nullable()
-                ->constrained('movimientos', 'id_movimiento')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
-
+     
             $table->foreignId('id_categoria')
                 ->nullable()
                 ->constrained('categorias', 'id_categoria')

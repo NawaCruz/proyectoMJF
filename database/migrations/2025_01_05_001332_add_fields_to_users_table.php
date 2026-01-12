@@ -26,7 +26,7 @@ return new class extends Migration
             // Esto puede romper por orden/circularidad si movimientos aún no existe.
             // Mejor dejarlo como columna nullable SIN FK (o agregar FK en otra migración al final).
             if (!Schema::hasColumn('users', 'id_movimiento')) {
-                $table->unsignedBigInteger('id_movimiento')->nullable()->after('id');
+                $table->unsignedBigInteger('id_movimiento')->nullable()->after('id_user');
             }
             });
     }
