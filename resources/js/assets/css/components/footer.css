@@ -1,0 +1,7 @@
+/* Footer */
+.footer {
+    padding: 20px 25px 30px;
+    color: var(--gray-dark);
+    font-size: 0.9rem;
+    text-align: center;
+}

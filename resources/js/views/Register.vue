@@ -18,9 +18,11 @@ const form = reactive({
 });
 
 const errors = reactive({
+    general: initialErrors.general?.[0] ?? '',
     name: initialErrors.name?.[0] ?? '',
     email: initialErrors.email?.[0] ?? '',
     password: initialErrors.password?.[0] ?? '',
+    password_confirmation: initialErrors.password_confirmation?.[0] ?? '',
 });
 
 const navLinks = [
@@ -82,6 +84,8 @@ const closeMenu = () => {
                         <form class="register-form" method="post" action="/register">
                             <input type="hidden" name="_token" :value="csrfToken">
 
+                            <p v-if="errors.general" class="form-error">{{ errors.general }}</p>
+
                             <label class="field">
                                 <span>Nombre completo</span>
                                 <input v-model="form.name" type="text" name="name" autocomplete="name" required>
@@ -103,6 +107,7 @@ const closeMenu = () => {
                             <label class="field">
                                 <span>Confirmar contrasena</span>
                                 <input v-model="form.password_confirmation" type="password" name="password_confirmation" autocomplete="new-password" required>
+                                <span v-if="errors.password_confirmation" class="field-error">{{ errors.password_confirmation }}</span>
                             </label>
 
                             <button type="submit" class="btn register-btn">Crear cuenta</button>
@@ -128,138 +133,6 @@ const closeMenu = () => {
     </div>
 </template>
 
-<style>
-.register-page {
-    --primary-color: #4a6bff;
-    --secondary-color: #6c63ff;
-    --light-color: #f8f9fa;
-    --text-color: #444;
-    --border-color: #e0e6f0;
-    --shadow: 0 20px 40px rgba(27, 39, 94, 0.12);
-    --transition: all 0.3s ease;
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #f5f7ff 0%, #eef2ff 100%);
-    color: var(--text-color);
-    min-height: 100vh;
-}
+<style src="@/assets/css/theme.css"></style>
+<style src="@/assets/css/auth.css"></style>
 
-.register-card {
-    background: white;
-    border-radius: 16px;
-    padding: 48px 40px;
-    box-shadow: var(--shadow);
-    text-align: left;
-}
-
-.register-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-size: 20px;
-    margin-bottom: 24px;
-}
-
-.register-card h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-.register-subtitle {
-    margin-bottom: 32px;
-    color: #666;
-}
-
-.register-form {
-    display: grid;
-    gap: 18px;
-}
-
-.register-main {
-    padding: 140px 0 90px;
-}
-
-.register-shell {
-    display: grid;
-    grid-template-columns: minmax(0, 460px);
-    gap: 40px;
-    align-items: start;
-    justify-content: center;
-}
-
-.register-btn {
-    width: 100%;
-    margin-top: 8px;
-}
-
-.register-divider {
-    position: relative;
-    text-align: center;
-    margin: 6px 0 2px;
-    color: #9aa4b2;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-}
-
-.register-divider::before,
-.register-divider::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 44%;
-    height: 1px;
-    background: #e2e8f0;
-}
-
-.register-divider::before {
-    left: 0;
-}
-
-.register-divider::after {
-    right: 0;
-}
-
-.google-btn {
-    width: 100%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.google-btn:disabled {
-    border-color: #d7dce5;
-    color: #8a94a6;
-    background: #f7f8fb;
-}
-
-.register-footer {
-    margin-top: 24px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-}
-
-.register-footer a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.register-footer a:hover {
-    color: var(--secondary-color);
-}
-
-@media (max-width: 992px) {
-    .register-main {
-        padding-top: 120px;
-    }
-}
-</style>

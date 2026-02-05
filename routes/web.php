@@ -17,3 +17,11 @@ Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
 Route::get('/register', [RegisterController::class, 'show'])->middleware('guest')->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
+
+Route::get('/app', function () {
+    return view('home');
+})->middleware('auth');
+
+Route::get('/app/{any}', function () {
+    return view('home');
+})->where('any', '.*')->middleware('auth');

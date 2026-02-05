@@ -29,7 +29,11 @@ class LoginController extends Controller
         }
 
         return back()
-            ->withErrors(['email' => 'Credenciales invalidas.'])
+            ->withErrors([
+                'general' => 'Credenciales invalidas.',
+                'email' => 'Credenciales invalidas.',
+                'password' => 'Credenciales invalidas.',
+            ])
             ->onlyInput('email');
     }
 
